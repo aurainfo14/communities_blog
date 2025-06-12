@@ -33,6 +33,7 @@ export default function SearchResults() {
     };
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         const fetchBlogs = async () => {
             try {
                 const response = await fetch('https://community-blog-410b.onrender.com/api/blogs');
@@ -173,6 +174,7 @@ export default function SearchResults() {
                                             image={article.image}
                                             alt={article.title}
                                             sx={{
+
                                                 objectFit: 'cover',
                                             }}
                                         />
@@ -204,6 +206,9 @@ export default function SearchResults() {
                                                 lineHeight: 1.4,
                                                 color: '#212529',
                                                 display: '-webkit-box',
+                                                textAlign: 'justify',
+                                                wordBreak: 'break-word',
+                                                overflowWrap: 'break-word',
                                                 WebkitLineClamp: 2,
                                                 WebkitBoxOrient: 'vertical',
                                                 overflow: 'hidden',

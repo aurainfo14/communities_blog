@@ -262,6 +262,7 @@ function StartingUp() {
                                                         className="card-image"
                                                         sx={{
                                                             objectFit: 'cover',
+
                                                             display: { xs: 'none', md: 'block' },
                                                             transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                                                         }}
@@ -308,6 +309,9 @@ function StartingUp() {
                                                             transition: 'color 0.3s ease',
                                                             display: '-webkit-box',
                                                             WebkitLineClamp: 2,
+                                                            textAlign: 'justify',
+                                                            wordBreak: 'break-word',
+                                                            overflowWrap: 'break-word',
                                                             WebkitBoxOrient: 'vertical',
                                                             overflow: 'hidden',
                                                             flexGrow: 1

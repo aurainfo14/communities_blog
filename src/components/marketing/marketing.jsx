@@ -259,6 +259,7 @@ function Marketing() {
                                                         alt={article.title}
                                                         className="card-image"
                                                         sx={{
+
                                                             objectFit: 'cover',
                                                             display: { xs: 'none', md: 'block' },
                                                             transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -297,6 +298,9 @@ function Marketing() {
                                                             display: '-webkit-box',
                                                             WebkitLineClamp: 2,
                                                             WebkitBoxOrient: 'vertical',
+                                                            textAlign: 'justify',
+                                                            wordBreak: 'break-word',
+                                                            overflowWrap: 'break-word',
                                                             overflow: 'hidden',
                                                             flexGrow: 1
                                                         }}

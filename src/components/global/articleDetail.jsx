@@ -16,15 +16,9 @@ function ArticleDetail() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const formatDate = (dateString) => {
-        return new Date(dateString).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        });
-    };
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         const fetchArticle = async () => {
             try {
                 setLoading(true);
@@ -160,12 +154,16 @@ function ArticleDetail() {
                 {/* Header Section */}
                 <Box sx={{ mb: 4 }}>
                     <Typography
-                        variant="h3"
+
                         component="h1"
                         gutterBottom
                         sx={{
+                            fontSize:{md:45,sm:43,xs:41},
                             fontWeight: 'bold',
                             lineHeight: 1.2,
+                            textAlign: 'justify',
+                            wordBreak: 'break-word',
+                            overflowWrap: 'break-word',
                             color: 'text.primary',
                             mb: 3
                         }}
@@ -173,39 +171,6 @@ function ArticleDetail() {
                         {article.title}
                     </Typography>
 
-                    {/* Meta Information */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3, flexWrap: 'wrap' }}>
-                        <Chip
-                            icon={<CalendarToday />}
-                            label={formatDate(article.createdAt)}
-                            variant="outlined"
-                            size="small"
-                            sx={{
-                                borderRadius: '20px',
-                                '& .MuiChip-icon': { fontSize: '16px' }
-                            }}
-                        />
-
-                        {article.type && (
-                            <Chip
-                                label={article.type.toUpperCase()}
-                                size="small"
-                                sx={{
-                                    background: 'linear-gradient(45deg, #667eea, #764ba2)',
-                                    color: 'white',
-                                    fontWeight: 700,
-                                    fontSize: '0.75rem',
-                                    letterSpacing: '0.5px',
-                                    boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
-                                    '& .MuiChip-label': {
-                                        px: 2
-                                    }
-                                }}
-                            />
-                        )}
-                    </Box>
-
-                    <Divider sx={{ my: 3 }} />
                 </Box>
 
                 {/* Featured Image */}
@@ -336,18 +301,7 @@ function ArticleDetail() {
                 )}
 
                 {/* Footer spacing */}
-                <Box sx={{ mt: 6, mb: 4 }}>
-                    <Divider />
-                    <Box sx={{ mt: 3, textAlign: 'center' }}>
-                        <Button
-                            variant="outlined"
-                            startIcon={<ArrowBack />}
-                            onClick={handleGoBack}
-                        >
-                            Back to Articles
-                        </Button>
-                    </Box>
-                </Box>
+
             </Box>
         </Container>
     );

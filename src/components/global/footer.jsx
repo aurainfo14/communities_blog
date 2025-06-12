@@ -41,38 +41,8 @@ function Footer() {
     };
 
     return (
-        <Box sx={{ backgroundColor: '#1e3a8a', position: 'relative', overflow: 'hidden' }}>
-            {/* Decorative Background Elements */}
-            <Box
-                sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '100%',
-                    background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%)',
-                    '&::before': {
-                        content: '""',
-                        position: 'absolute',
-                        top: '-50%',
-                        right: '-20%',
-                        width: '40%',
-                        height: '200%',
-                        background: 'radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%)',
-                        borderRadius: '50%'
-                    },
-                    '&::after': {
-                        content: '""',
-                        position: 'absolute',
-                        bottom: '-30%',
-                        left: '-10%',
-                        width: '30%',
-                        height: '150%',
-                        background: 'radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%)',
-                        borderRadius: '50%'
-                    }
-                }}
-            />
+        <Box sx={{ backgroundColor: '#1e3a8a', overflow: 'hidden' }}>
+
 
             <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
                 <Box sx={{ py: 6 }}>

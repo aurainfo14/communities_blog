@@ -303,6 +303,7 @@ function Latest() {
                                                                 alt={article.title}
                                                                 className="card-image"
                                                                 sx={{
+
                                                                     objectFit: 'cover',
                                                                     transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                                                                 }}
@@ -343,6 +344,9 @@ function Latest() {
                                                                     transition: 'color 0.3s ease',
                                                                     display: '-webkit-box',
                                                                     WebkitLineClamp: 2,
+                                                                    textAlign: 'justify',
+                                                                    wordBreak: 'break-word',
+                                                                    overflowWrap: 'break-word',
                                                                     WebkitBoxOrient: 'vertical',
                                                                     overflow: 'hidden',
                                                                     flexGrow: 1

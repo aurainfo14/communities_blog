@@ -51,12 +51,17 @@ function Navbar() {
     const toggleDrawer = (open) => () => setDrawerOpen(open);
 
     const handleSearch = () => {
-        if (searchTerm.trim()) {
-            navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
-            setSearchTerm('');
-            if (isMobile) {
+        const trimmed = searchTerm.trim();
+        if (!trimmed) return;
+
+        navigate(`/search?q=${encodeURIComponent(trimmed)}`);
+        setSearchTerm('');
+
+        // Use setTimeout to ensure drawer closes after navigation
+        if (isMobile) {
+            setTimeout(() => {
                 setDrawerOpen(false);
-            }
+            }, 100); // small delay
         }
     };
 
@@ -297,11 +302,7 @@ function Navbar() {
                                 placeholder="Search articles..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter') {
-                                        handleSearch();
-                                    }
-                                }}
+                                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                                 sx={{ flex: 1, px: 2, fontSize: '0.95rem' }}
                                 startAdornment={
                                     <InputAdornment position="start">

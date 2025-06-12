@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Typography, Chip, Skeleton, Grid } from '@mui/material';
+import {Box, Container, Typography, Chip, Skeleton, Grid, Button, Divider} from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import img from "../../assets/images.jfif";
 import { RocketLaunch as RocketIcon, } from "@mui/icons-material";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
 
 
 function Blog() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchArticles = async () => {
@@ -39,6 +42,21 @@ function Blog() {
             hour: '2-digit',
             minute: '2-digit'
         });
+    };
+
+    // Function to extract preview text from HTML content
+    const getPreviewText = (htmlContent, maxLength = 200) => {
+        if (!htmlContent) return 'No content available';
+
+        // Remove HTML tags
+        const textContent = htmlContent.replace(/<[^>]*>/g, '');
+
+        // Truncate to maxLength
+        if (textContent.length <= maxLength) {
+            return textContent;
+        }
+
+        return textContent.substring(0, maxLength).trim() + '...';
     };
 
     if (loading) return (
@@ -204,10 +222,7 @@ function Blog() {
                         <Box sx={{
                             textAlign: 'center',
                             py: 12,
-                            backgroundColor: 'rgba(255,255,255,0.95)',
-                            backdropFilter: 'blur(10px)',
-                            borderRadius: '25px',
-                            boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+
                         }}>
                             <Typography variant="h4" sx={{
                                 color: '#2d1b69',
@@ -222,147 +237,138 @@ function Blog() {
                         </Box>
                     ) : (
                         articles.map((article, index) => (
-                            <Box key={article.id || index} sx={{
-                                mb: 8,
-                                backgroundColor: 'rgba(255,255,255,0.95)',
-                                backdropFilter: 'blur(20px)',
-                                borderRadius: '30px',
-                                overflow: 'hidden',
-                                boxShadow: '0 25px 50px rgba(0,0,0,0.15)',
-                                transition: 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)',
-                                '&:hover': {
-                                    transform: 'translateY(-8px)',
-                                    boxShadow: '0 35px 70px rgba(0,0,0,0.2)'
-                                }
-                            }}>
-                                <Box sx={{ p: { xs: 4, md: 6 } }}>
-                                    <Typography
-                                        variant="h3"
-                                        component="h1"
-                                        sx={{
-                                            fontWeight: 700,
-                                            fontSize: { xs: '1.8rem', md: '2.5rem' },
-                                            mb: 3,
-                                            color: '#1e3a8a',
-                                            lineHeight: 1.3,
+                            <React.Fragment key={article.id || index}>
+                                <Box sx={{
+                                    mb: 6,
+                                }}>
+                                    <Box sx={{ pt: { xs: 4, md: 5 } }}>
+                                        <Typography
+                                            variant="h3"
+                                            component="h1"
+                                            sx={{
+                                                fontWeight: 700,
+                                                fontSize: { xs: '1.8rem', md: '2.5rem' },
+                                                mb: 3,
+                                                color: '#1e3a8a',
+                                                lineHeight: 1.3,
+                                                textAlign: 'justify',
+                                                wordBreak: 'break-word',
+                                                overflowWrap: 'break-word',
 
-                                        }}
-                                    >
-                                        {article.title || 'Untitled'}
-                                    </Typography>
-
-                                    {article.createdAt && (
-                                        <Typography sx={{
-                                            color: '#1e3a8a',
-                                            fontSize: '0.95rem',
-                                            fontWeight: 500,
-                                            mb: 3,
-                                            display: 'inline-flex',
-                                            alignItems: 'center',
-                                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                                            px: 2,
-                                            py: 1,
-                                            borderRadius: '20px',
-                                            '&::before': {
-
-                                                mr: 1
-                                            }
-                                        }}>
-
-                                            <CalendarMonthIcon /> Published: {formatDate(article.createdAt)}
+                                            }}
+                                        >
+                                            {article.title || 'Untitled'}
                                         </Typography>
-                                    )}
 
-                                    {article.type && (
-                                        <Box mb={3}>
-                                            <Chip
-                                                label={article.type}
+                                        {article.createdAt && (
+                                            <Typography sx={{
+                                                color: '#1e3a8a',
+                                                fontSize: '0.95rem',
+                                                fontWeight: 500,
+                                                mb: 3,
+                                                display: 'inline-flex',
+                                                alignItems: 'center',
+                                                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                                                px: 2,
+                                                py: 1,
+                                                borderRadius: '20px',
+                                                '&::before': {
+
+                                                    mr: 1
+                                                }
+                                            }}>
+                                                <CalendarMonthIcon /> Published: {formatDate(article.createdAt)}
+                                            </Typography>
+                                        )}
+
+
+                                        <Box sx={{
+                                            // position: 'relative',
+                                            mb: 4,
+                                            borderRadius: '20px',
+                                            overflow: 'hidden',
+                                            boxShadow: '0 15px 35px rgba(0,0,0,0.1)'
+                                        }}>
+                                            <Box
+                                                component="img"
+                                                src={article.image || img}
+                                                alt={article.title || 'Blog image'}
                                                 sx={{
-                                                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                                                    color: '#1e3a8a',
-                                                    fontWeight: 600,
-                                                    fontSize: '0.9rem',
-                                                    px: 1,
-                                                    // boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
-                                                    '& .MuiChip-label': {
-                                                        px: 2
+                                                    objectFit: 'cover',
+                                                    height: { xs: "250px", sm: "450px", md: "650px" },
+                                                    width: '100%',
+                                                    transition: 'transform 0.6s ease',
+                                                    '&:hover': {
+                                                        transform: 'scale(1)'
                                                     }
+                                                }}
+                                                onError={(e) => {
+                                                    e.target.onerror = null;
+                                                    e.target.src = img;
                                                 }}
                                             />
                                         </Box>
-                                    )}
 
-                                    <Box sx={{
-                                        position: 'relative',
-                                        mb: 4,
-                                        borderRadius: '20px',
-                                        overflow: 'hidden',
-                                        boxShadow: '0 15px 35px rgba(0,0,0,0.1)'
-                                    }}>
-                                        <Box
-                                            component="img"
-                                            src={article.image || img}
-                                            alt={article.title || 'Blog image'}
+                                        {/* Preview Text instead of full content */}
+                                        <Typography
+                                            variant="body1"
                                             sx={{
-                                                objectFit: 'cover',
-                                                height: { xs: "250px", sm: "450px", md: "650px" },
-                                                width: '100%',
-                                                transition: 'transform 0.6s ease',
-                                                '&:hover': {
-                                                    transform: 'scale(1.05)'
-                                                }
+                                                fontWeight: 400,
+                                                fontSize: { xs: '1.05rem', md: '1.1rem' },
+                                                lineHeight: 1.8,
+                                                color: '#4a5568',
+                                                textAlign: 'justify',
+                                                wordBreak: 'break-word',
+                                                overflowWrap: 'break-word',
+                                                mb: 4,
                                             }}
-                                            onError={(e) => {
-                                                e.target.onerror = null;
-                                                e.target.src = img;
-                                            }}
-                                        />
-                                        <Box sx={{
-                                            position: 'absolute',
-                                            bottom: 0,
-                                            left: 0,
-                                            right: 0,
-                                            height: '30%',
-                                            background: 'linear-gradient(transparent, rgba(0,0,0,0.3))'
-                                        }} />
-                                    </Box>
+                                        >
+                                            {getPreviewText(article.content)}
+                                        </Typography>
 
-                                    <Typography
-                                        variant="body1"
+                                        {/* Read More Button */}
+                                        <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                                            <Button
+                                                variant="contained"
+                                                endIcon={<ArrowForwardIcon />}
+                                                onClick={() => navigate(`/article-detail/${article._id}`)}
+                                                sx={{
+                                                    background: 'linear-gradient(45deg, #1e3a8a, #3b82f6)',
+                                                    color: 'white',
+                                                    fontWeight: 600,
+                                                    fontSize: '1rem',
+                                                    px: 4,
+                                                    py: 1.5,
+                                                    borderRadius: '25px',
+                                                    textTransform: 'none',
+                                                    boxShadow: '0 8px 25px rgba(30, 58, 138, 0.3)',
+                                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                                    '&:hover': {
+                                                        background: 'linear-gradient(45deg, #1e40af, #2563eb)',
+                                                        transform: 'translateY(-2px)',
+                                                        boxShadow: '0 12px 35px rgba(30, 58, 138, 0.4)',
+                                                    }
+                                                }}
+                                            >
+                                                Read More
+                                            </Button>
+                                        </Box>
+                                    </Box>
+                                </Box>
+
+                                {/* Divider between articles (not after the last one) */}
+                                {index < articles.length - 1 && (
+                                    <Divider
                                         sx={{
-                                            fontWeight: 400,
-                                            fontSize: { xs: '1.05rem', md: '1.1rem' },
-                                            lineHeight: 1.8,
-                                            color: '#4a5568',
-                                            textAlign: 'justify',
-                                            wordBreak: 'break-word',
-                                            overflowWrap: 'break-word',
-                                            mb: 4,
-                                            '& img': {
-                                                maxWidth: '100%',
-                                                height: 'auto',
-                                                borderRadius: '15px',
-                                                mt: 3,
-                                                mb: 3,
-                                                boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
-                                            },
-                                            '& a': {
-                                                color: '#1e3a8a',
-                                                textDecoration: 'none',
-                                                fontWeight: 500,
-                                                borderBottom: '2px solid transparent',
-                                                transition: 'border-color 0.3s ease',
-                                                '&:hover': {
-                                                    borderBottomColor: '#667eea'
-                                                }
-                                            }
-                                        }}
-                                        dangerouslySetInnerHTML={{
-                                            __html: article.content || 'No content available'
+                                            // my: 6,
+                                            borderColor: 'rgba(30, 58, 138, 0.1)',
+                                            borderWidth: '1px',
+                                            width: '100%',
+                                            mx: 'auto'
                                         }}
                                     />
-                                </Box>
-                            </Box>
+                                )}
+                            </React.Fragment>
                         ))
                     )}
                 </Box>

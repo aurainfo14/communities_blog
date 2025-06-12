@@ -260,6 +260,9 @@ function FindAnIdea() {
                                                         alt={article.title}
                                                         className="card-image"
                                                         sx={{
+                                                            textAlign: 'justify',
+                                                            wordBreak: 'break-word',
+                                                            overflowWrap: 'break-word',
                                                             objectFit: 'cover',
                                                             display: { xs: 'none', md: 'block' },
                                                             transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',

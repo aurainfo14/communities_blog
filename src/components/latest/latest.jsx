@@ -344,7 +344,7 @@ function Latest() {
                                                                     transition: 'color 0.3s ease',
                                                                     display: '-webkit-box',
                                                                     WebkitLineClamp: 2,
-                                                                    textAlign: 'justify',
+                                                                    // textAlign: 'justify',
                                                                     wordBreak: 'break-word',
                                                                     overflowWrap: 'break-word',
                                                                     WebkitBoxOrient: 'vertical',

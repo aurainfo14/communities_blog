@@ -251,7 +251,7 @@ function Blog() {
                                                 mb: 3,
                                                 color: '#1e3a8a',
                                                 lineHeight: 1.3,
-                                                textAlign: 'justify',
+
                                                 wordBreak: 'break-word',
                                                 overflowWrap: 'break-word',
 
@@ -317,7 +317,7 @@ function Blog() {
                                                 fontSize: { xs: '1.05rem', md: '1.1rem' },
                                                 lineHeight: 1.8,
                                                 color: '#4a5568',
-                                                textAlign: 'justify',
+                                                // textAlign: 'justify',
                                                 wordBreak: 'break-word',
                                                 overflowWrap: 'break-word',
                                                 mb: 4,

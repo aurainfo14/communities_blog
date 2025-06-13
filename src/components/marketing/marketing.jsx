@@ -298,7 +298,7 @@ function Marketing() {
                                                             display: '-webkit-box',
                                                             WebkitLineClamp: 2,
                                                             WebkitBoxOrient: 'vertical',
-                                                            textAlign: 'justify',
+                                                            // textAlign: 'justify',
                                                             wordBreak: 'break-word',
                                                             overflowWrap: 'break-word',
                                                             overflow: 'hidden',

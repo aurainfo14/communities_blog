@@ -206,7 +206,7 @@ export default function SearchResults() {
                                                 lineHeight: 1.4,
                                                 color: '#212529',
                                                 display: '-webkit-box',
-                                                textAlign: 'justify',
+                                                // textAlign: 'justify',
                                                 wordBreak: 'break-word',
                                                 overflowWrap: 'break-word',
                                                 WebkitLineClamp: 2,

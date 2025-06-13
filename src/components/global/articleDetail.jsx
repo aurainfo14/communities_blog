@@ -158,10 +158,10 @@ function ArticleDetail() {
                         component="h1"
                         gutterBottom
                         sx={{
-                            fontSize:{md:45,sm:43,xs:41},
+                            fontSize:{md:45,sm:35,xs:30},
                             fontWeight: 'bold',
                             lineHeight: 1.2,
-                            textAlign: 'justify',
+                            // textAlign: 'justify',
                             wordBreak: 'break-word',
                             overflowWrap: 'break-word',
                             color: 'text.primary',
@@ -211,7 +211,7 @@ function ArticleDetail() {
                     <Box
                         sx={{
                             mt: 4,
-                            textAlign: 'justify',
+                            // textAlign: 'justify',
                             wordBreak: 'break-word',
                             overflowWrap: 'break-word',
                             '& .markdown-content': {

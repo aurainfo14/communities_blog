@@ -100,9 +100,9 @@ function ArticleDetail() {
                         // sx={{ minHeight: '100vh' }} // Optional: vertically center
                     >
                         <Grid container spacing={4} justifyContent="center" maxWidth="xl">
-                            {[...Array(6)].map((_, index) => (
+                            {[...Array(1)].map((_, index) => (
                                 <Grid item xs={12} sm={6} md={4} key={index}>
-                                    <Skeleton variant="rectangular" width={410} height={218} sx={{ borderRadius: 3 }} />
+                                    <Skeleton variant="rectangular" width={610} height={418} sx={{ borderRadius: 3 }} />
                                     <Skeleton sx={{ borderRadius: 3 }} />
                                     <Skeleton width="60%" sx={{ borderRadius: 3 }} />
                                 </Grid>

@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Typography, Box, CircularProgress, Divider, Chip, Button } from '@mui/material';
+import {Container, Typography, Box, CircularProgress, Divider, Chip, Button, Skeleton, Grid} from '@mui/material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import fallbackImg from '../../assets/images.jfif'; // fallback image
@@ -64,20 +64,54 @@ function ArticleDetail() {
 
     if (loading) {
         return (
-            <Container maxWidth="md">
+            <Box>
+                {/* Hero Section Skeleton */}
                 <Box
-                    py={8}
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    gap={2}
+                    sx={{
+                        // background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        py: { xs: 8, md: 12 },
+                        textAlign: 'center',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        '&::before': {
+                            content: '""',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: '#1e3a8a',
+                            backdropFilter: 'blur(10px)',
+                        }
+                    }}
                 >
-                    <CircularProgress size={50} thickness={4} />
-                    <Typography variant="h6" color="text.secondary">
-                        Loading article...
-                    </Typography>
+                    <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
+                        <Skeleton variant="text" width="60%" height={80} sx={{ mx: 'auto', mb: 2 }} />
+                        <Skeleton variant="text" width="80%" height={40} sx={{ mx: 'auto' }} />
+                    </Container>
                 </Box>
-            </Container>
+
+                {/* Content Skeletons */}
+                <Container maxWidth="xl" sx={{ py: 5 }}>
+                    <Grid
+                        container
+                        justifyContent="center"
+                        alignItems="center"
+                        // sx={{ minHeight: '100vh' }} // Optional: vertically center
+                    >
+                        <Grid container spacing={4} justifyContent="center" maxWidth="xl">
+                            {[...Array(6)].map((_, index) => (
+                                <Grid item xs={12} sm={6} md={4} key={index}>
+                                    <Skeleton variant="rectangular" width={410} height={218} sx={{ borderRadius: 3 }} />
+                                    <Skeleton sx={{ borderRadius: 3 }} />
+                                    <Skeleton width="60%" sx={{ borderRadius: 3 }} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Grid>
+
+                </Container>
+            </Box>
         );
     }
 

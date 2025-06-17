@@ -49,10 +49,9 @@ export default function SearchResults() {
         fetchBlogs();
     }, []);
 
+    // Updated filter to search only in title
     const filteredResults = blogs.filter((item) =>
-        item.title.toLowerCase().includes(query) ||
-        item.content.toLowerCase().includes(query) ||
-        item.type.toLowerCase().includes(query)
+        item.title.toLowerCase().includes(query)
     );
 
     if (loading) {
